@@ -11,10 +11,10 @@
 - idVendor : 設備的廠商 ID
 - idProduct : 設備的產品 ID
 - manufacturer : 設備製造商名稱
-- serial : 設備的序列號
+- serial number: 設備的序列號
 # device_rule_generate.sh
 ## 介紹
-用於自動創建 usb rule 的腳本
+用於自動創建 usb 裝置 rule 的腳本，讓 jetson 或是 樹梅派知道該 usb 裝置的用途
 ## 使用
 於腳本以下區域新增自己的 rule
 
