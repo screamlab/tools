@@ -1,6 +1,6 @@
 # tools
 ## 使用地點
-在需要連接並辨識特定 USB 裝置的系統上，請將此專案 clone 下來，並按照以下指引進行設置
+在需要連接並辨識特定 USB 裝置的主系統上，請將此專案 clone 下來，並按照以下指引進行設置
 # extract_usb_info.sh
 ## 介紹
 快速列出特定 USB 裝置的 idVendor, idProduct, manufacturer, serial number...等等屬性
@@ -16,7 +16,7 @@
 - serial number: 設備的序列號
 # device_rule_generate.sh
 ## 介紹
-此腳本負責根據 USB 裝置的特徵生成特定的 udev 規則，讓系統能夠辨識並指派固定的名稱給該 USB 裝置
+此腳本負責根據 USB 裝置的特徵生成特定的 udev 規則，讓主系統能夠辨識並指派固定的名稱給該 USB 裝置
 ## 使用
 - 修改 `device_rule_generate.sh` 該腳本的以下區域，可根據 `extract_usb_info.sh` 所查詢到的 USB 裝置特徵新增至以下區域，讓設備辨識出該 usb 裝置名稱
 - 修改完後須使用 `sudo` 執行，系統將會指派固定名稱給該 USB 裝置並立即生效
