@@ -1,7 +1,7 @@
 # tools
 # extract_usb_info.sh
 ## 介紹
-快速列出特定 usb 裝置的 idVendor, idProduct, manufacturer, serial 屬性
+快速列出特定 usb 裝置的 idVendor, idProduct, manufacturer, serial number...等等屬性
 ## 使用方法
 後面/dev/ttyUSB0是要查詢的值
 ```
