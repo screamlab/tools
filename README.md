@@ -1,9 +1,9 @@
 # tools
 ## 使用地點
-於需要連接這些 usb 裝置並辨識出該 usb 裝置的系統上將此專案 clone 下來，並依照以下使用教學做設定
+於需要連接這些 USB 裝置並辨識出該 USB 裝置的系統上將此專案 clone 下來，並依照以下使用教學做設定
 # extract_usb_info.sh
 ## 介紹
-快速列出特定 usb 裝置的 idVendor, idProduct, manufacturer, serial number...等等屬性
+快速列出特定 USB 裝置的 idVendor, idProduct, manufacturer, serial number...等等屬性
 ## 使用方法
 後面/dev/ttyUSB0是要查詢的值
 ```
