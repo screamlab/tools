@@ -32,3 +32,5 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", SYMLINK+="u
 
 #--------------------------------
 ```
+執行結果 :
+![image](https://github.com/alianlbj23/tools/blob/main/pic/console.png?raw=true)
