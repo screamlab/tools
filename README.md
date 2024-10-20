@@ -103,10 +103,6 @@ sudo python3 rule_generator.py
 - Confirms the creation of udev rules for each device.
 - Reports any errors encountered during the process.
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/your-username/tools/issues).
