@@ -103,6 +103,3 @@ sudo python3 rule_generator.py
 - Confirms the creation of udev rules for each device.
 - Reports any errors encountered during the process.
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check [issues page](https://github.com/your-username/tools/issues).
