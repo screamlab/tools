@@ -61,6 +61,11 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", SYMLINK+="u
 #### Description
 This Python script automates the process of generating udev rules for USB devices. It communicates with connected devices, retrieves their custom IDs, and creates appropriate udev rules.
 
+#### Command Flow: rule_generator.py to Arduino/ESP32
+![Command Flow](https://github.com/alianlbj23/tools/blob/main/pic/rule_generate.drawio.png?raw=true)
+
+#### Process Flow for Flashing CUSTOM_ID and Generating USB Device Rule
+![Process Flow](https://github.com/alianlbj23/tools/blob/main/pic/Use_flowchart.drawio.png?raw=true)
 #### Prerequisites
 - Python 3.x
 - `pyserial` library (install with `pip install pyserial`)
