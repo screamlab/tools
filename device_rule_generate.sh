@@ -17,10 +17,10 @@ cat <<EOL > $RULES_FILE
 # 以下開放新增---------------------
 
 # LiDAR 設備規則
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{manufacturer}=="Silicon Labs", SYMLINK+="usb_ydlidar", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{manufacturer}=="Silicon Labs", ATTRS{serial}=="881236a7a3239c42ad0b7f9f850a44a0",SYMLINK+="usb_ydlidar", MODE="0666"
 
 # Arduino 設備規則
-SUBSYSTEM=="tty", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", SYMLINK+="usb_rear_wheel", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", ATTRS{serial}=="0001", SYMLINK+="usb_rear_wheel", MODE="0666"
 
 #--------------------------------
 
