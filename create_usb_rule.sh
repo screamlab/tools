@@ -1,9 +1,17 @@
 #!/bin/bash
 
+# 預設的熱門名稱
+POPULAR_NAMES=("usb_rear_wheel" "usb_front_wheel" "usb_robot_arm" "usb_lidar")
+
 # 檢查參數
 if [ "$#" -ne 2 ]; then
     echo "用法: $0 <USB_DEVICE_PATH> <USB_NAME>"
-    echo "例如: $0 /dev/sdb my_usb_rule"
+    echo "例如: $0 /dev/ttyUSB0 my_usb_rule"
+    echo ""
+    echo "熱門名稱 (可用作 <USB_NAME>):"
+    for name in "${POPULAR_NAMES[@]}"; do
+        echo "  - $name"
+    done
     exit 1
 fi
 
@@ -25,12 +33,20 @@ if [ -z "$ID_VENDOR" ] || [ -z "$ID_PRODUCT" ]; then
     exit 1
 fi
 
-# 生成 UDEV 規則
-echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"$ID_VENDOR\", ATTR{idProduct}==\"$ID_PRODUCT\", ATTR{serial}==\"$ID_SERIAL\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
+# 生成 UDEV 規則（針對 ttyUSB 設備）
+echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"$ID_VENDOR\", ATTRS{idProduct}==\"$ID_PRODUCT\", ATTRS{serial}==\"$ID_SERIAL\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
 
 # 重新載入 UDEV 規則
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
-echo "UDEV 規則已創建: $RULE_FILE"
-echo "請重新插入 USB 設備以應用新規則。"
+echo ""
+echo "🔥 UDEV 規則已創建: $RULE_FILE"
+echo "🔌 請重新插入 USB 設備以應用新規則。"
+echo ""
+echo "✅ 你現在可以使用 /dev/$USB_NAME 來存取該設備！"
+echo ""
+echo "🔹 常用名稱 (可用於設定符號連結):"
+for name in "${POPULAR_NAMES[@]}"; do
+    echo "  - $name"
+done
