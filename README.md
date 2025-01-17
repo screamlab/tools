@@ -12,8 +12,19 @@ cd tools
 ```
 
 ## 🛠 Tools
+### 1. create_usb_rule.sh
+Description
 
-### 1. extract_usb_info.sh
+This script creates a persistent udev rule for a specified USB device, allowing the system to recognize and assign a fixed name to it.
+
+Usage
+```
+sudo ./create_usb_rule.sh /dev/ttyUSB0 usb_custom_name
+```
+
+Replace /dev/ttyUSB0 with your device path and usb_custom_name with the desired symlink name.
+
+### 2. extract_usb_info.sh
 
 #### Description
 Quickly extracts and lists key attributes of specific USB devices.
@@ -30,7 +41,7 @@ Replace `/dev/ttyUSB0` with the device you want to query.
 - `manufacturer`: Device manufacturer name
 - `serial`: Device's serial number
 
-### 2. device_rule_generate.sh
+### 3. device_rule_generate.sh
 
 #### Description
 Generates specific udev rules based on USB device characteristics, allowing the main system to recognize and assign fixed names to these USB devices.
@@ -56,7 +67,7 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", SYMLINK+="u
 #### Result
 ![Console Output](https://github.com/alianlbj23/tools/blob/main/pic/console.png?raw=true)
 
-### 3. rule_generator.py
+### 4. rule_generator.py
 
 #### Description
 This Python script automates the process of generating udev rules for USB devices. It communicates with connected devices, retrieves their custom IDs, and creates appropriate udev rules.
