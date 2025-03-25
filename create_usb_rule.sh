@@ -34,7 +34,7 @@ if [ -z "$ID_VENDOR" ] || [ -z "$ID_PRODUCT" ]; then
 fi
 
 # 生成 UDEV 規則（針對 ttyUSB 設備）
-echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"$ID_VENDOR\", ATTRS{idProduct}==\"$ID_PRODUCT\", ATTRS{serial}==\"$ID_SERIAL\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
+echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"$ID_VENDOR\", ATTRS{idProduct}==\"$ID_PRODUCT\", ATTRS{serial}==\"$ID_SERIAL\", MODE=\"0666\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
 
 # 重新載入 UDEV 規則
 sudo udevadm control --reload-rules
