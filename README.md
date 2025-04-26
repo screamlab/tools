@@ -87,12 +87,12 @@ For this script to work correctly, the Arduino or ESP32 devices must include the
 
 ```cpp
 // Replace with your device's unique identifier
-#define CUSTOM_ID "usb_rear_wheel" 
+#define CUSTOM_ID "usb_rear_wheel"
 
 // In your main loop or command processing function:
 if (doc.containsKey("command") && doc["command"] == "I") {
     Serial.println(CUSTOM_ID);
-} 
+}
 ```
 
 This code allows the device to respond with its CUSTOM_ID when queried by the rule_generator.py script. The CUSTOM_ID will be used as the device's rule name in the generated udev rules.
@@ -118,4 +118,40 @@ sudo python3 rule_generator.py
 - Shows the matching KERNELS information.
 - Confirms the creation of udev rules for each device.
 - Reports any errors encountered during the process.
+
+### 4. find_usb_kernels.sh
+
+#### Description
+Detects the specific `KERNELS` value associated with a given USB device path (e.g., `/dev/ttyUSB0`). The `KERNELS` value represents the physical port path in the system's kernel device tree. This value is useful for creating udev rules that target a specific physical USB port regardless of the device plugged into it.
+
+#### Usage
+```bash
+./find_usb_kernels.sh /dev/ttyUSB0
+```
+Replace `/dev/ttyUSB0` with the actual device path you want to inspect.
+
+#### Output
+- The script outputs the `KERNELS` value found for the specified device (e.g., `1-1.2`, `2-3.4.1`).
+
+### 5. set_usb_name_by_kernels.sh
+
+#### Description
+Creates a udev rule that assigns a fixed symbolic link name (e.g., `/dev/my_specific_usb`) to *any* compatible device plugged into a specific physical USB port. It identifies the port using the `KERNELS` value obtained from `find_usb_kernels.sh`. This is useful when you want a specific port to always map to the same device name, regardless of which identical device is plugged in or the order they are plugged in.
+
+#### Usage
+1.  **Find the KERNELS value:** Use `./find_usb_kernels.sh <DEVICE_PATH>` for a device currently plugged into the desired physical port to get its `KERNELS` value.
+2.  **Run the script:** Execute the script with `sudo`, providing the `KERNELS` value and the desired symbolic link name.
+
+```bash
+# Example: Assign /dev/front_sensor to the port with KERNELS="1-1.2"
+sudo ./set_usb_name_by_kernels.sh "1-1.2" front_sensor
+```
+Replace `"1-1.2"` with the actual `KERNELS` value and `front_sensor` with your desired fixed name.
+
+#### Functionality
+- Creates a udev rule file in `/etc/udev/rules.d/` (e.g., `99-front_sensor.rules`).
+- The rule matches the specified `KERNELS` value and `SUBSYSTEM=="tty"`.
+- Assigns the specified `SYMLINK+` name.
+- Sets `MODE="0666"` for general read/write access (modify if needed).
+- Reloads udev rules to apply the change. You might need to replug the device.
 
