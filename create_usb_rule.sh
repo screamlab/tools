@@ -33,8 +33,13 @@ if [ -z "$ID_VENDOR" ] || [ -z "$ID_PRODUCT" ]; then
     exit 1
 fi
 
-# 生成 UDEV 規則（針對 ttyUSB 設備）
-echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"$ID_VENDOR\", ATTRS{idProduct}==\"$ID_PRODUCT\", ATTRS{serial}==\"$ID_SERIAL\", MODE=\"0666\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
+# 生成 UDEV 規則，只有在有 serial 的情況下才添加 serial 匹配條件
+if [ -z "$ID_SERIAL" ]; then
+    echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"$ID_VENDOR\", ATTRS{idProduct}==\"$ID_PRODUCT\", MODE=\"0666\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
+    echo "注意: 未檢測到 Serial Number，已創建不含 Serial Number 的規則。"
+else
+    echo "SUBSYSTEM==\"tty\", ATTRS{idVendor}==\"$ID_VENDOR\", ATTRS{idProduct}==\"$ID_PRODUCT\", ATTRS{serial}==\"$ID_SERIAL\", MODE=\"0666\", SYMLINK+=\"$USB_NAME\"" | sudo tee "$RULE_FILE"
+fi
 
 # 重新載入 UDEV 規則
 sudo udevadm control --reload-rules

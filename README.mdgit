@@ -1,1 +1,0 @@
-# tools initgit add README.mdgit commit -m first commitgit branch -M maingit remote add origin git@github.com:alianlbj23/tools.gitgit push -u origin main
